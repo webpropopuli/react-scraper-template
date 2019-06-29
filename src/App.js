@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import cheerio from "cheerio";
 import axios from "axios";
 
+// // this comment tells babel to convert jsx to calls to a function called jsx instead of React.createElement
+// /** @jsx jsx */
+import { css, jsx } from "@emotion/core";
 import "./App.css";
 
 function App() {
@@ -34,11 +37,45 @@ function App() {
     })();
   }, []);
 
+  const divCss = css`
+    background-color: black;
+    border-radius: 4px;
+    margin: 20px;
+    &:hover {
+      background-color: #333;
+    }
+  `;
+  const olCss = css`
+    margin: 10px;
+
+    font-size: 30px;
+    color: silver;
+    border-radius: 4px;
+    &:hover {
+      background-color: #222;
+      color: white;
+    }
+  `;
+  const liCss = css`
+    padding: 4px;
+    margin: 4px;
+    background-color: darkgreen;
+    font-size: 20px;
+    border-radius: 4px;
+    &:hover {
+      color: yellow;
+      background-color: green;
+    }
+  `;
+
   return (
-    <div>
-      <ol>
+    <div css={divCss}>
+      <ol css={olCss}>
+        A few of my friends...
         {data.names.map(item => (
-          <li key={item.id}>{item.name}</li>
+          <li css={liCss} key={item.id}>
+            {item.name}
+          </li>
         ))}
       </ol>
     </div>
